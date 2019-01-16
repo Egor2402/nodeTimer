@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Socket time</title>
+        <style>
+            body {
+                margin: 0;
+            }
+
+            .data {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                height: 100vh;
+                font-size: 42px;
+            }
+        </style>
+    </head>
+    <body>
+        <script src="/socket.io/socket.io.js"></script>
+        <script>
+            const socket = io();
+
+            socket.on('time_update', setData);
+
+            socket.on('connect_error', () => setData('Connection error'));
+
+            function setData(data) {
+                document.getElementsByClassName('data')[0].innerHTML = data;
+            }
+        </script>
+
+        <div class="data"></div>
+    </body>
+</html>
